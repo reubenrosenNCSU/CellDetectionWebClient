@@ -26,5 +26,5 @@ To deploy this project, open your folder directory and run the following python 
 ## Acknowledgements
 
  - [keras-retinanet](https://github.com/fizyr/keras-retinanet)
- - [COMBINe: Cell detectiOn in Mouse BraIN](https://github.com/yccc12/COMBINe/tree/main)# CellDetectionWebClient
+ - [COMBINe: Cell detectiOn in Mouse BraIN](https://github.com/yccc12/COMBINe/tree/main)
 
