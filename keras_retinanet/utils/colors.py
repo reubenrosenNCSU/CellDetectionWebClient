@@ -1,6 +1,5 @@
 import warnings
 
-
 def label_color(label):
     """ Return a color from a set of predefined colors. Contains 80 colors in total.
 
@@ -28,7 +27,18 @@ shuffle(colors)
 pprint(colors)
 ```
 """
+# added a custom list of colors; Rene
 colors = [
+    [255,255,255], # white
+    [0,255,255], # yellow
+    [255,128,0], # sky blue 
+    [0,255,0], # lime
+    [255,0,255], # magenta
+    [0,0,255], # red
+    [208,224,64], # turquoise
+    [255,255,255], # white
+    [160,160,160], # gray
+    [0,0,0], # black
     [31  , 0   , 255] ,
     [0   , 159 , 255] ,
     [255 , 95  , 0]   ,

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Ready</title>
+</head>
+<body>
+    <h1>Your download is ready!</h1>
+    <p><a href="{{ download_link }}">Click here to download the ZIP file</a></p>
+    
+    {% if image_filename %}
+        <h2>Preview of the detection image:</h2>
+        <img src="{{ url_for('static', filename=image_filename) }}" alt="Detection Image" style="max-width: 100%; height: auto;">
+    {% endif %}
+</body>
+</html>

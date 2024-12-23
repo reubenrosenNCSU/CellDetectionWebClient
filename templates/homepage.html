@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        /* Container for the images */
+        .image-container {
+            display: flex;           /* Arrange the images side by side */
+            justify-content: center; /* Center the images horizontally */
+            gap: 20px;               /* Add space between the images */
+            flex-wrap: wrap;         /* Allow wrapping in case of smaller screen size */
+        }
+
+        /* Style for each image */
+        .image-container img {
+            width: 300px;            /* Resize images to a smaller size */
+            height: 300px;           /* Maintain aspect ratio by setting height */
+            object-fit: cover;       /* Ensure the images are cropped to fit */
+            cursor: pointer;        /* Make the images clickable */
+            border-radius: 8px;      /* Optional: add rounded corners */
+        }
+
+        /* Styling for captions below images */
+        .image-caption {
+            text-align: center;
+            font-size: 16px;
+            margin-top: 10px;        /* Add space between image and caption */
+        }
+
+        /* Styling for the back link */
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>NCSU - Cell Detection System - Reuben Rosen</h1>
+    <p>Please choose whether you would like to process a monochrome image or a colored image.</p>
+
+    <!-- Container for images -->
+    <div class="image-container">
+        <!-- Image 1: Color -->
+        <div>
+            <a href="/process1">
+                <img src="{{ url_for('static', filename='1.png') }}" alt="Color Image">
+            </a>
+            <div class="image-caption">Color</div>
+        </div>
+
+        <!-- Image 2: Monochrome -->
+        <div>
+            <a href="/process2">
+                <img src="{{ url_for('static', filename='2.png') }}" alt="Monochrome Image">
+            </a>
+            <div class="image-caption">Monochrome</div>
+        </div>
+    </div>
+
+</body>
+</html>

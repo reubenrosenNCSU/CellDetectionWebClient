@@ -1,0 +1,68 @@
+[2024-12-12 14:33:56 -0500] [275652] [INFO] Starting gunicorn 23.0.0
+[2024-12-12 14:33:56 -0500] [275652] [INFO] Listening at: http://10.139.175.104:4894 (275652)
+[2024-12-12 14:33:56 -0500] [275652] [INFO] Using worker: sync
+[2024-12-12 14:33:56 -0500] [275664] [INFO] Booting worker with pid: 275664
+Processed and saved: /home/greenbaum-gpu/Reuben/keras-retinanet/input/newtest16.tiff
+Created 4 tiles.
+2024-12-12 14:34:26.460594: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-12-12 14:34:27.503017: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+2024-12-12 14:34:29.340458: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+2024-12-12 14:34:30.805576: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+2024-12-12 14:34:31.232739: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+2024-12-12 14:34:31.736179: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+Merged 1 images.
+Processed and saved: /home/greenbaum-gpu/Reuben/keras-retinanet/input/20241113_Neutrophil_Migration_48_Hour_2_Device_1_20x_2_z070_ch02.tif
+Created 4 tiles.
+2024-12-12 14:35:14.033981: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-12-12 14:35:15.094817: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+2024-12-12 14:35:16.995025: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+2024-12-12 14:35:18.158947: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+2024-12-12 14:35:18.584200: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+2024-12-12 14:35:19.031423: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+Merged 1 images.
+Processed and saved: /home/greenbaum-gpu/Reuben/keras-retinanet/input/20241113_Neutrophil_Migration_48_Hour_2_Device_1_20x_2_z070_ch02.tif
+Created 4 tiles.
+2024-12-12 14:35:54.456642: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-12-12 14:35:55.526820: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+2024-12-12 14:35:57.394060: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+2024-12-12 14:35:58.712439: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+2024-12-12 14:35:59.108433: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+2024-12-12 14:35:59.476065: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+Merged 1 images.
+Processed and saved: /home/greenbaum-gpu/Reuben/keras-retinanet/input/20241113_Neutrophil_Migration_48_Hour_2_Device_1_20x_2_z070_ch02.tif
+Created 4 tiles.
+2024-12-12 14:36:21.295543: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-12-12 14:36:22.331947: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+2024-12-12 14:36:24.171894: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+2024-12-12 14:36:25.361907: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+2024-12-12 14:36:25.800047: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+2024-12-12 14:36:26.189167: I tensorflow/core/common_runtime/executor.cc:1197] [/device:CPU:0] (DEBUG INFO) Executor start aborting (this does not indicate an error and you can ignore this message): INVALID_ARGUMENT: You must feed a value for placeholder tensor 'Placeholder/_0' with dtype float and shape [1,800,800,3]
+	 [[{{node Placeholder/_0}}]]
+Merged 1 images.
+[2024-12-12 14:36:46 -0500] [275652] [INFO] Handling signal: hup
+[2024-12-12 14:36:46 -0500] [275652] [INFO] Hang up: Master
+[2024-12-12 14:36:46 -0500] [275652] [ERROR] Worker (pid:275664) was sent SIGHUP!
+[2024-12-12 14:36:46 -0500] [279843] [INFO] Booting worker with pid: 279843
+[2024-12-12 14:37:39 -0500] [279843] [INFO] Worker exiting (pid: 279843)
+[2024-12-12 14:37:39 -0500] [275652] [INFO] Handling signal: term
+[2024-12-12 14:37:39 -0500] [275652] [ERROR] Worker (pid:279843) was sent SIGTERM!
+[2024-12-12 14:37:39 -0500] [275652] [INFO] Shutting down: Master

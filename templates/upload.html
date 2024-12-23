@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload TIFF Image</title>
+</head>
+<body>
+    <h1>Upload TIFF Image for {{ image_type }}</h1>
+    <form action="{{ url_for('upload', image_type=image_type) }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".tiff,.tif" required>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
