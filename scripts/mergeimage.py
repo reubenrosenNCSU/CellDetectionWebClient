@@ -37,17 +37,32 @@ def merge_png_tiles(input_dir, output_dir):
         full_height = rows[-1] + tile_height if tile_height else rows[0]
         full_width = cols[-1] + tile_width if tile_width else cols[0]
 
-        # Create a blank image to hold the full image
+        # Open the first tile to check its mode (RGB or L)
         first_tile_path = os.path.join(input_dir, tiles[0][2])
         first_tile = Image.open(first_tile_path)
-        mode = first_tile.mode  # e.g., "RGB" or "RGBA"
-        blank_color = (0, 0, 0, 0) if mode == "RGBA" else (0, 0, 0)
-        full_image = Image.new(mode, (full_width, full_height), blank_color)
+        mode = first_tile.mode  # e.g., "RGB" or "L"
+
+        # Create a blank image based on the first tile's mode
+        if mode == "RGBA" or mode == "RGB":
+            blank_color = (0, 0, 0, 0) if mode == "RGBA" else (0, 0, 0)
+            full_image = Image.new(mode, (full_width, full_height), blank_color)
+        elif mode == "L":  # Grayscale image mode
+            full_image = Image.new("L", (full_width, full_height), 0)  # Blank grayscale image (black)
+        else:
+            raise ValueError(f"Unsupported image mode: {mode}")
 
         # Place each tile in the correct position
         for row, col, tile_file in tiles:
             tile_path = os.path.join(input_dir, tile_file)
             tile = Image.open(tile_path)
+
+            # If the tile is in grayscale, convert it to match the full image mode
+            if tile.mode == "L" and mode != "L":
+                tile = tile.convert(mode)
+            # If the tile is in RGB or RGBA, and the full image is grayscale, convert it to grayscale
+            elif (tile.mode == "RGB" or tile.mode == "RGBA") and mode == "L":
+                tile = tile.convert("L")
+
             full_image.paste(tile, (col, row))
 
         # Save the merged image

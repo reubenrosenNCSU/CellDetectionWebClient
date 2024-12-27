@@ -5,36 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc; /* Soft background */
+            color: #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #4CAF50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 300;
+        }
+
         /* Container for the images */
         .image-container {
-            display: flex;           /* Arrange the images side by side */
-            justify-content: center; /* Center the images horizontally */
-            gap: 20px;               /* Add space between the images */
-            flex-wrap: wrap;         /* Allow wrapping in case of smaller screen size */
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            transition: all 0.3s ease;
         }
 
         /* Style for each image */
+        .image-container div {
+            text-align: center;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
         .image-container img {
-            width: 300px;            /* Resize images to a smaller size */
-            height: 300px;           /* Maintain aspect ratio by setting height */
-            object-fit: cover;       /* Ensure the images are cropped to fit */
-            cursor: pointer;        /* Make the images clickable */
-            border-radius: 8px;      /* Optional: add rounded corners */
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border-radius: 12px;
         }
 
-        /* Styling for captions below images */
+        .image-container div:hover img {
+            transform: scale(1.05); /* Zoom in effect */
+        }
+
+        .image-container div:hover {
+            transform: translateY(-5px); /* Slight lift effect */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
         .image-caption {
-            text-align: center;
-            font-size: 16px;
-            margin-top: 10px;        /* Add space between image and caption */
+            font-size: 18px;
+            color: #4CAF50;
+            margin-top: 12px;
+            font-weight: bold;
         }
 
-        /* Styling for the back link */
         .back-link {
-            display: block;
-            margin-top: 20px;
-            text-align: center;
             font-size: 18px;
+            color: #4CAF50;
+            text-decoration: none;
+            margin-top: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .image-container {
+                gap: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -61,6 +133,9 @@
             <div class="image-caption">Monochrome</div>
         </div>
     </div>
+
+    <!-- Link to navigate back -->
+    <a href="/" class="back-link">Back to Home</a>
 
 </body>
 </html>

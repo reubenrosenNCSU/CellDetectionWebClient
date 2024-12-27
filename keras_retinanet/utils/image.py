@@ -18,8 +18,8 @@ def read_image_bgr(path):
     if len(image.shape) == 2:
         H, W = image.shape
         tmp = np.zeros((H,W,3))
-        tmp[:,:,2] = image
-        tmp[:,:,1] = image
+        tmp[:,:,2] = image #copying red channel into empty tmp img array
+        tmp[:,:,1] = image #copying green channel into empty tmp img array
         image = tmp
     else:
         image=image #if image is already bgr, leave it unchanged

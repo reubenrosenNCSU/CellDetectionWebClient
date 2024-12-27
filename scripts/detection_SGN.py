@@ -241,7 +241,8 @@ for i, testpath in enumerate(testpaths):
 
         # Save the processed image in the output folder
         output_image_path = os.path.join(pATHRESULT, testnames[i] + '_detected.png')
-        cv2.imwrite(output_image_path, fulldraw)
+        cv2.imwrite(output_image_path, cv2.cvtColor(fulldraw.astype('uint8'), cv2.COLOR_RGB2GRAY))
+
 
         # Output to CSV in the csv_output folder
         with open(CSV, mode='w') as file:
