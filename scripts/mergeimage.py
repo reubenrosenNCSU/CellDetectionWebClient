@@ -73,7 +73,7 @@ def merge_png_tiles(input_dir, output_dir):
     return merged_images
 
 # Example usage
-input_dir = '/home/greenbaum-gpu/Reuben/CellDetection/output'  # Replace with your actual path
-output_dir = '/home/greenbaum-gpu/Reuben/CellDetection/finaloutput'  # Replace with your actual path
+input_dir = '/home/greenbaumgpu/Reuben/CellDetection/output'  # Replace with your actual path
+output_dir = '/home/greenbaumgpu/Reuben/CellDetection/finaloutput'  # Replace with your actual path
 merged_images = merge_png_tiles(input_dir, output_dir)
 print(f"Merged {len(merged_images)} images.")
