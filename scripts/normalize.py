@@ -35,8 +35,8 @@ def process_images(input_dir, output_dir):
             convert_to_16bit(input_dir, output_dir, filename)
 
 # Example usage
-input_directory = '/home/greenbaum-gpu/Reuben/CellDetection/uploads'
-output_directory = '/home/greenbaum-gpu/Reuben/CellDetection/input'
+input_directory = '/home/greenbaumgpu/Reuben/CellDetection/uploads'
+output_directory = '/home/greenbaumgpu/Reuben/CellDetection/input'
 
 process_images(input_directory, output_directory)
 

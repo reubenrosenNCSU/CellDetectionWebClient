@@ -44,7 +44,7 @@ def split_tiff(input_dir, output_dir, tile_size=(512, 512)):
     return all_split_images
 
 # Example usage
-input_dir = '/home/greenbaum-gpu/Reuben/CellDetection/input'
-output_dir = '/home/greenbaum-gpu/Reuben/CellDetection/images'
+input_dir = '/home/greenbaumgpu/Reuben/CellDetection/input'
+output_dir = '/home/greenbaumgpu/Reuben/CellDetection/images'
 split_images = split_tiff(input_dir, output_dir)
 print(f"Created {len(split_images)} tiles.")

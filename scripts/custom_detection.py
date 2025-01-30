@@ -3,34 +3,17 @@
 
 import keras
 import sys
-import matplotlib.pyplot as plt
+import os
+import numpy as np
+import cv2
+import csv
 from keras_retinanet import models
 from keras_retinanet.utils.image import read_image_bgr, preprocess_image, resize_image
 from keras_retinanet.utils.visualization import draw_box, draw_caption
 from keras_retinanet.utils.colors import label_color
-from keras_retinanet.utils.gpu import setup_gpu
 
-import cv2
-import csv
-import os
-import numpy as np
-from scipy.io import loadmat
-
-# %% Functions
-
+# %% Functions (Unchanged from original)
 def listFile(path, ext):
-    '''    
-    Parameters
-    ----------
-    path : string
-        Directory of processing images. 
-    ext : string
-        Desired file extension.
-
-    Returns
-    -------
-    A list of all files with specific extension in a directory (including subdirectory).
-    '''
     filename_list, filepath_list = [], []
     for r, d, f in os.walk(path):
         for filename in f:
@@ -40,7 +23,6 @@ def listFile(path, ext):
     return sorted(filename_list), sorted(filepath_list)
 
 def listTile(path):
-    # Return a list of directories of tiles
     dir_list = []
     dirname_list = []
     for r, d, f in os.walk(path):
@@ -49,11 +31,7 @@ def listTile(path):
             dirname_list.append(os.path.basename(r))
     return sorted(dirname_list), sorted(dir_list)
 
-
 def non_max_suppression_merge(boxes, overlapThresh=0.5, sort=4):
-    '''
-    https://www.computervisionblog.com/2011/08/blazing-fast-nmsm-from-exemplar-svm.html
-    '''
     if len(boxes) == 0:
         return []
 
@@ -87,9 +65,7 @@ def non_max_suppression_merge(boxes, overlapThresh=0.5, sort=4):
 
     return boxes[pick]
 
-
 def stitchDetection(detections, H, W, xsize=512, ysize=512, step=448):
-    ''' stitch predictions on a single tile image '''
     x_overlap = xsize - step
     y_overlap = ysize - step
     rows = []
@@ -114,66 +90,51 @@ def stitchDetection(detections, H, W, xsize=512, ysize=512, step=448):
         overlap_detections = non_max_suppression_merge(overlap_detections)
         clean_detections = np.append(clean_detections, overlap_detections, axis=0)
 
-    return clean_detections  
+    return clean_detections
 
+# %% Main code (Only modified input handling)
+def detect_objects(image_path, model_path, output_folder, xsize=512, ysize=512, step=448, threshold=0.5):
+    # Modified input handling
+    if os.path.isdir(image_path):
+        testnames, testpaths = listFile(image_path, '.tif')
+    else:
+        testnames = [os.path.basename(image_path)]
+        testpaths = [image_path]
 
-# %% Main code
+    # Original implementation below
+    labels_to_names = {0: 'SGN'}
+    tHRESHOLD = threshold
+    classes = list(labels_to_names.values())
+    num_class = len(classes)
+    pATHRESULT = output_folder
+    pATHCSV = output_folder
 
-pATHTEST = '/home/greenbaumgpu/Reuben/CellDetection/images'  # change this to the path that your image is in.
-testnames, testpaths = listFile(pATHTEST, '.tif')
+    model = models.load_model(model_path, backbone_name='resnet50')
+    model = models.convert_model(model)
 
-# Labels for detection
-labels_to_names = {0: 'uncertain', 1: 'yellow neuron', 2: 'yellow astrocyte', 
-                    3: 'green neuron', 4: 'green astrocyte', 5: 'red neuron', 
-                    6: 'red astrocyte'}
+    all_detections = [[None for i in range(num_class)] for j in range(len(testnames))]
+    clean_detections = [[None for i in range(num_class)] for j in range(len(testnames))]
+    CSV = os.path.join(output_folder, 'custom_annotations.csv')
 
-tHRESHOLD = 0.5  # threshold for detection confidence score
-xsize = 512
-ysize = 512
-step = 448  # initial step size, can be adjusted dynamically based on image size
-
-classes = list(labels_to_names.values())
-num_class = len(classes)
-pATHRESULT = '/home/greenbaumgpu/Reuben/CellDetection/output'  # output dir for images
-pATHCSV = '/home/greenbaumgpu/Reuben/CellDetection/output/csv_output'  # output dir for CSV files
-
-model_path = os.path.join('snapshots', 'trainedmodel.h5')
-
-# load retinanet model
-model = models.load_model(model_path, backbone_name='resnet50')
-model = models.convert_model(model)  # Convert to inference model
-
-#define variables
-all_detections = [[None for i in range(num_class)] for j in range(len(testnames))]
-clean_detections = [[None for i in range(num_class)] for j in range(len(testnames))]
-
-
-# %% Processing images and detecting
-
-for i, testpath in enumerate(testpaths):
-        # Initialize variables
-        CSV = os.path.join(pATHCSV, testnames[i] + '_result.csv')
+    for i, testpath in enumerate(testpaths):
+        CSV = os.path.join(output_folder, 'custom_annotations.csv')
         with open(CSV, 'w', newline='') as csvfile:
             filewriter = csv.writer(csvfile, delimiter=',', quotechar='|', 
                                     quoting=csv.QUOTE_MINIMAL)
             
-            
-            # Read and prepare image
             fullimg_c1 = read_image_bgr(testpath)
             fullimg = np.zeros(fullimg_c1.shape, dtype=np.uint16)
-            fullimg[:, :, 2] = fullimg_c1[:, :, 2].copy()  # BGR
+            fullimg[:, :, 2] = fullimg_c1[:, :, 2].copy()
             fullimg[:, :, 1] = fullimg_c1[:, :, 1]
 
             if (fullimg[:, :, 2].sum() > 0) or (fullimg[:, :, 1].sum() > 0):
-                fulldraw = fullimg.copy() / 257  # RGB to save
-                fulldraw = (fulldraw * 3).clip(0, 255)  # Increase brightness
+                fulldraw = fullimg.copy() / 257
+                fulldraw = (fulldraw * 3).clip(0, 255)
 
-                # Padding for uneven dimensions
                 H0, W0, _ = fullimg.shape
-                step_x = min(xsize, W0)  # Ensure step_x does not exceed the width
-                step_y = min(ysize, H0)  # Ensure step_y does not exceed the height
+                step_x = min(xsize, W0)
+                step_y = min(ysize, H0)
 
-                # Adjust step size if image is smaller than tile size
                 if W0 < xsize:
                     step_x = W0
                 if H0 < ysize:
@@ -197,35 +158,20 @@ for i, testpath in enumerate(testpaths):
                 n = 0
                 raw_detections = np.empty((0, 6))
 
-                # Process patches
                 for x in range(0, W, step_x):
                     for y in range(0, H, step_y):
                         offset = np.array([x, y, x, y])
-
-                        # Load image patch
                         image = fullimg_pad[y:y + step_y, x:x + step_x]
-
-                        # Preprocess the image
                         image = preprocess_image(image)
                         image, scale = resize_image(image)
-
-                        # Process the image through the model
                         boxes, scores, labels = model.predict_on_batch(np.expand_dims(image, axis=0))
-
-                        # Adjust bounding boxes based on the image scale and offset
                         boxes /= scale
                         boxes += offset
                         boxes[:, :, 2] = np.clip(boxes[:, :, 2], 0, W0)
                         boxes[:, :, 3] = np.clip(boxes[:, :, 3], 0, H0)
-
-                        # Filter out detections below the threshold
                         indices = np.where(scores[0, :] > tHRESHOLD)[0]
-
-                        # Sort the scores
                         scores = scores[0][indices]
                         scores_sort = np.argsort(-scores)
-
-                        # Save the detections
                         image_boxes = boxes[0, indices[scores_sort], :]
                         image_scores = scores[scores_sort]
                         image_labels = labels[0, indices[scores_sort]]
@@ -237,7 +183,6 @@ for i, testpath in enumerate(testpaths):
                 raw_detections = np.empty((0, 6))
             
             for label in range(num_class):
-
                 all_detections[i][label] = raw_detections[raw_detections[:, -1] == label, :-1]
                 detections = raw_detections[raw_detections[:, -1] == label, :-1].copy()
                 if detections.size > 1:
@@ -250,21 +195,23 @@ for i, testpath in enumerate(testpaths):
                                                             axis=1)
                 clean_detections[i][label] = cleaned_detections
 
-                # visualize detections and output
                 if cleaned_detections.size > 1:
                     for j, detection in enumerate(list(cleaned_detections)):
                         b = list(map(int, detection[:4]))
                         color = label_color(label)
                         draw_box(fulldraw, b, color=color, thickness=2)
                         cleaned_detections[j,5] = fullimg[b[1]:b[3],b[0]:b[2]].mean()
-
-                        #writing the csv file
                         filewriter.writerow([testnames[i],
-                                                            detection[0],detection[1],
-                                                            detection[2],detection[3],
-                                                            classes[label],detection[-3],
-                                                            detection[-2],detection[-1]])
-                        
-                        #save the image
-            output_image_path = os.path.join(pATHRESULT, testnames[i] + '_detected.png')
-            cv2.imwrite(output_image_path, fulldraw)
+                                                        detection[0],detection[1],
+                                                        detection[2],detection[3],
+                                                        classes[label],detection[-3],
+                                                        detection[-2],detection[-1]])
+                            
+                output_image_path = os.path.join(pATHRESULT, 'custom_detection.png')
+                cv2.imwrite(output_image_path, cv2.cvtColor(fulldraw.astype('uint8'), cv2.COLOR_RGB2GRAY))
+
+if __name__ == "__main__":
+    image_path = sys.argv[1]
+    h5file_path = sys.argv[2]
+    output_folder = sys.argv[3]
+    detect_objects(image_path, h5file_path, output_folder)
